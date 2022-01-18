@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { Favourite } from "./favouriteTypes"
+import { Favourite } from "@/favourite/favouriteTypes"
 
 const initialState: Favourite[] = []
 
