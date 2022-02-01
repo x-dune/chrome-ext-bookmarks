@@ -1432,10 +1432,10 @@ once@^1.3.0:
   dependencies:
     wrappy "1"
 
-open-props@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/open-props/-/open-props-1.1.3.tgz#93b5c1553da64e27977af8204677a0087a7d3fb7"
-  integrity sha512-ZqmhNgotSvpHvKG9IK1+tUkFVLmEOGKwVu3twh0DE1N0toA0DFxVMiRBERcM7iKxIobcPDEW3GXEdHmDMCe0wg==
+open-props@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/open-props/-/open-props-1.3.1.tgz#7eb01210a2e2e21233a51330372d34eefdeb9195"
+  integrity sha512-HgBnCluUmk4drU0fpQEhGhXOlRoJI5Jc8ke5Zxx8yg97Hqx1xv9BMb1zasjpGjOzjtLrnMbmWXaVL1yxf3qWOw==
 
 p-limit@^2.2.0:
   version "2.3.0"

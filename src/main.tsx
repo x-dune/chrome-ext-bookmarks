@@ -5,10 +5,7 @@ import { Provider } from "react-redux"
 import App from "@/App"
 import "open-props/style"
 import "open-props/normalize"
-import "open-props/sizes"
-import "open-props/colors"
-import "open-props/orange"
-import "open-props/gradients"
+import "open-props/colors-hsl"
 import { store } from "@/store"
 
 ReactDOM.render(

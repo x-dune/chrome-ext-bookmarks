@@ -18,26 +18,26 @@ const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--violet-9);
-  transition: background-color 0.25s;
   padding: 0 var(--size-3);
-  margin-bottom: var(--size-2);
-  border-radius: var(--size-2);
+  border-radius: var(--radius-2);
   cursor: pointer;
+  border: var(--border-size-2) solid transparent;
+  transition: border-color 0.25s, background-color 0.25s;
 
   &:hover {
-    background-color: var(--violet-7);
+    border-color: var(--violet-7);
+    background-color: hsl(var(--violet-7-hsl) / 30%);
   }
 `
 
 const Image = styled.img`
-  width: var(--size-3);
-  height: var(--size-3);
+  width: var(--font-size-1);
+  height: var(--font-size-1);
 `
 
 const Title = styled.p`
-  color: var(--gray-0);
-  font-size: var(--size-3);
+  color: var(--gray-4);
+  font-size: var(--font-size-1);
   margin-left: var(--size-2);
   max-inline-size: initial;
   white-space: nowrap;
