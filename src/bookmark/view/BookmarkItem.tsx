@@ -1,17 +1,14 @@
 import styled from "styled-components"
-import Logo from "@/logo.svg"
-import { isLocalEnv } from "@/util"
+import { getFavicon } from "../bookmarkUtil"
 
 interface BookmarkItemProps {
   item: chrome.bookmarks.BookmarkTreeNode
 }
 
 const BookmarkItem = (props: BookmarkItemProps) => {
-  const faviconUrl = !isLocalEnv ? `chrome://favicon/${props.item.url}` : Logo
-
   return (
     <Button onClick={() => window.open(props.item.url)}>
-      <Image src={faviconUrl} alt="" />
+      <Image src={getFavicon(props.item)} alt="" />
       <Title>{props.item.title}</Title>
     </Button>
   )
