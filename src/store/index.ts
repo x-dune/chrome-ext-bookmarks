@@ -1,6 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
+import bookmark from "@/bookmark/bookmarkSlice"
 
-const rootReducer = combineReducers({})
+const rootReducer = combineReducers({
+  bookmark,
+})
 
 export const store = configureStore({
   reducer: rootReducer,
