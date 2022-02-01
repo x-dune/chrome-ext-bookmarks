@@ -1,9 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
-import favourite from "@/favourite/favouriteReducer"
 
-const rootReducer = combineReducers({
-  favourite,
-})
+const rootReducer = combineReducers({})
 
 export const store = configureStore({
   reducer: rootReducer,

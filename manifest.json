@@ -1,0 +1,11 @@
+{
+  "manifest_version": 2,
+  "name": "χBookmark",
+  "version": "0.1.0",
+  "description": "It's like a bookmark, but χ",
+  "incognito": "spanning",
+  "permissions": ["storage", "bookmarks", "chrome://favicon/"],
+  "chrome_url_overrides": {
+    "newtab": " index.html"
+  }
+}
