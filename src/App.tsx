@@ -3,7 +3,7 @@ import styled from "styled-components"
 import BookmarkItems from "@/bookmark/view/BookmarkItems"
 
 const Container = styled.div`
-  display: block;
+  padding: var(--size-2);
 `
 
 function App() {
