@@ -1,17 +1,14 @@
 import { useEffect } from "react"
 import styled from "styled-components"
 import { dummyBookmarkTree } from "@/bookmark/bookmarkConstants"
-import { bookmarkBarSelector } from "@/bookmark/bookmarkSelectors"
+import { displayBookmarkFolderSelector } from "@/bookmark/bookmarkSelectors"
 import { bookmarkTreeActions } from "@/bookmark/bookmarkSlice"
-import BookmarkItem from "@/bookmark/view/BookmarkItem"
+import BookmarkFolder from "@/bookmark/view/BookmarkFolder"
 import { useAppDispatch, useAppSelector } from "@/store/hook"
 import { isLocalEnv } from "@/util"
 
-const BookmarkItems = () => {
-  const { bookmarkBar, bookmark } = useAppSelector((state) => ({
-    bookmarkBar: bookmarkBarSelector(state),
-    bookmark: state.bookmark,
-  }))
+const BookmarkFolders = () => {
+  const displayBookmarkFolder = useAppSelector(displayBookmarkFolderSelector)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -24,19 +21,20 @@ const BookmarkItems = () => {
     }
   }, [])
 
-  console.log(">>>", bookmark)
-
   return (
     <Container>
-      {bookmarkBar?.map((item) => (
-        <BookmarkItem key={item.id} item={item} />
+      {displayBookmarkFolder.map((node) => (
+        <BookmarkFolder key={node.id} item={node} />
       ))}
     </Container>
   )
 }
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: row;
   flex: 1;
+  min-width: 0;
 `
 
-export default BookmarkItems
+export default BookmarkFolders

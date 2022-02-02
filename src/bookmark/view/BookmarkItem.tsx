@@ -7,7 +7,7 @@ interface BookmarkItemProps {
 
 const BookmarkItem = (props: BookmarkItemProps) => {
   return (
-    <Button onClick={() => window.open(props.item.url)}>
+    <Button onClick={() => window.open(props.item.url)} title={props.item.title}>
       <Image src={getFavicon(props.item)} alt="" />
       <Title>{props.item.title}</Title>
     </Button>
@@ -36,7 +36,7 @@ const Image = styled.img`
 `
 
 const Title = styled.p`
-  color: var(--gray-4);
+  color: var(--text-1);
   font-size: var(--font-size-1);
   margin-left: var(--size-2);
   max-inline-size: initial;

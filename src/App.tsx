@@ -1,15 +1,16 @@
 import "@/index.css"
 import styled from "styled-components"
-import BookmarkItems from "@/bookmark/view/BookmarkItems"
+import BookmarkFolders from "@/bookmark/view/BookmarkFolders"
 
 const Container = styled.div`
+  display: flex;
   padding: var(--size-2);
 `
 
 function App() {
   return (
     <Container>
-      <BookmarkItems />
+      <BookmarkFolders />
     </Container>
   )
 }
