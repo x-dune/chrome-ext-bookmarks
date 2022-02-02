@@ -7,7 +7,7 @@ interface BookmarkItemProps {
 
 const BookmarkItem = (props: BookmarkItemProps) => {
   return (
-    <Button onClick={() => window.open(props.item.url)} title={props.item.title}>
+    <Button onClick={() => window.open(props.item.url, "_self")} title={props.item.title}>
       <Image src={getFavicon(props.item)} alt="" />
       <Title>{props.item.title}</Title>
     </Button>
