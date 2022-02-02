@@ -1,5 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit"
-import { bookmarkTreeNodeBfs } from "./bookmarkUtil"
+import { MAX_DISPLAY_FOLDER_IDS } from "@/bookmark/bookmarkConstants"
+import { bookmarkTreeNodeFindAll } from "@/bookmark/bookmarkUtil"
 import type { RootState } from "@/store"
 
 const bookmarkSelector = (state: RootState) => state.bookmark
@@ -11,12 +12,25 @@ export const bookmarkBarSelector = createSelector(
   (bookmarkTree) => bookmarkTree?.[0]?.children?.[0]?.children ?? [],
 )
 
+const bookmarkFoldersSelector = createSelector(bookmarkTreeSelector, (bookmarkTree) =>
+  bookmarkTreeNodeFindAll(bookmarkTree, (item) => Boolean(item.children && item.children.length > 0)),
+)
+
 export const displayBookmarkFolderSelector = createSelector(
-  bookmarkTreeSelector,
+  bookmarkFoldersSelector,
   displayFolderIdsSelector,
-  (bookmarkTree, folderIds) =>
+  (bookmarkFolders, folderIds) =>
     folderIds.flatMap((id) => {
-      const found = bookmarkTreeNodeBfs(bookmarkTree, id)
+      const found = bookmarkFolders.find((item) => item.id === id)
       return found ? [found] : []
     }),
+)
+
+export const bookmarkFoldersWithUrlChildrenSelector = createSelector(bookmarkFoldersSelector, (bookmarkFolders) =>
+  bookmarkFolders.filter((item) => item.children?.some((x) => x.url)),
+)
+
+export const canAddDisplayFolderIdSelector = createSelector(
+  displayFolderIdsSelector,
+  (folderIds) => folderIds.length <= MAX_DISPLAY_FOLDER_IDS - 1,
 )

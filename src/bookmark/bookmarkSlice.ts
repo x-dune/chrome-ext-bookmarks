@@ -1,4 +1,5 @@
 import { PayloadAction, combineReducers, createSlice } from "@reduxjs/toolkit"
+import { MAX_DISPLAY_FOLDER_IDS } from "@/bookmark/bookmarkConstants"
 import { BookmarkState } from "@/bookmark/types"
 
 const initialState: BookmarkState = {
@@ -26,7 +27,11 @@ const displayFolderIds = createSlice({
       return action.payload
     },
     add(state, action: PayloadAction<string>) {
-      return state.concat(action.payload)
+      if (state.length < MAX_DISPLAY_FOLDER_IDS) {
+        return state.concat(action.payload)
+      } else {
+        return state
+      }
     },
     //edit
   },

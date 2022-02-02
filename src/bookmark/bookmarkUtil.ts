@@ -11,16 +11,21 @@ export function getFavicon(bookmarkNode: chrome.bookmarks.BookmarkTreeNode) {
   return !isLocalEnv ? `chrome://favicon/${bookmarkNode.url}` : getDummyFavicon(bookmarkNode)
 }
 
-export function bookmarkTreeNodeBfs(tree: chrome.bookmarks.BookmarkTreeNode[], id: string) {
+export function bookmarkTreeNodeFindAll(
+  tree: chrome.bookmarks.BookmarkTreeNode[],
+  predicate: (item: chrome.bookmarks.BookmarkTreeNode) => boolean,
+) {
   const q = [...tree]
+  const found = []
   while (q.length > 0) {
     const current = q.shift()
     if (current) {
-      if (current.id === id) {
-        return current
+      if (predicate(current)) {
+        found.push(current)
       }
 
       current.children && q.push(...current.children)
     }
   }
+  return found
 }

@@ -1,3 +1,5 @@
+export const MAX_DISPLAY_FOLDER_IDS = 4
+
 export const dummyBookmarkTree: chrome.bookmarks.BookmarkTreeNode[] = [
   {
     children: [
