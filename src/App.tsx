@@ -14,7 +14,7 @@ const Container = styled.div`
 
 function App() {
   const canAddDisplayFolderId = useAppSelector(canAddDisplayFolderIdSelector)
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
 
   return (
     <Container>
