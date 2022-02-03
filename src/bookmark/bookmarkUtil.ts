@@ -1,5 +1,8 @@
 import reactLogo from "@/assets/react.svg"
 import viteLogo from "@/assets/vite.svg"
+import { STORAGE_KEY, dummyBookmarkTree } from "@/bookmark/bookmarkConstants"
+import { bookmarkTreeActions, displayFolderIdsActions } from "@/bookmark/bookmarkSlice"
+import { AppDispatch } from "@/store"
 import { isLocalEnv } from "@/util"
 
 function getDummyFavicon(bookmarkNode: chrome.bookmarks.BookmarkTreeNode) {
@@ -28,4 +31,41 @@ export function bookmarkTreeNodeFindAll(
     }
   }
   return found
+}
+
+export function getBookmarkTree(dispatch: AppDispatch) {
+  if (isLocalEnv) {
+    dispatch(bookmarkTreeActions.set(dummyBookmarkTree))
+  } else {
+    chrome.bookmarks.getTree((result) => {
+      dispatch(bookmarkTreeActions.set(result))
+    })
+  }
+}
+
+export function getDisplayFolderIdsFromStorage(dispatch: AppDispatch) {
+  if (isLocalEnv) {
+    const result = window.localStorage.getItem(STORAGE_KEY)
+    if (result) {
+      dispatch(displayFolderIdsActions.set(JSON.parse(result)))
+    } else {
+      dispatch(displayFolderIdsActions.setDefault())
+    }
+  } else {
+    chrome.storage.local.get(STORAGE_KEY, (result) => {
+      if (result[STORAGE_KEY]) {
+        dispatch(displayFolderIdsActions.set(result[STORAGE_KEY]))
+      } else {
+        dispatch(displayFolderIdsActions.setDefault())
+      }
+    })
+  }
+}
+
+export function setDisplayFolderIdsInStorage(displayFolderIds: string[]) {
+  if (isLocalEnv) {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(displayFolderIds))
+  } else {
+    chrome.storage.local.set({ [STORAGE_KEY]: displayFolderIds })
+  }
 }

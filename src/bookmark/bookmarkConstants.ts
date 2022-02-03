@@ -137,3 +137,5 @@ export const dummyBookmarkTree: chrome.bookmarks.BookmarkTreeNode[] = [
     title: "",
   },
 ]
+
+export const STORAGE_KEY = "displayFolderIds"

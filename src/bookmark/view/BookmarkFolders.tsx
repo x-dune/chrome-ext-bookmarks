@@ -1,24 +1,17 @@
 import { useEffect } from "react"
 import styled from "styled-components"
-import { dummyBookmarkTree } from "@/bookmark/bookmarkConstants"
+import { getBookmarkTree, getDisplayFolderIdsFromStorage } from "../bookmarkUtil"
 import { displayBookmarkFolderSelector } from "@/bookmark/bookmarkSelectors"
-import { bookmarkTreeActions } from "@/bookmark/bookmarkSlice"
 import BookmarkFolder from "@/bookmark/view/BookmarkFolder"
 import { useAppDispatch, useAppSelector } from "@/store/hook"
-import { isLocalEnv } from "@/util"
 
 const BookmarkFolders = () => {
   const displayBookmarkFolder = useAppSelector(displayBookmarkFolderSelector)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (!isLocalEnv) {
-      chrome.bookmarks.getTree((result) => {
-        dispatch(bookmarkTreeActions.set(result))
-      })
-    } else {
-      dispatch(bookmarkTreeActions.set(dummyBookmarkTree))
-    }
+    getBookmarkTree(dispatch)
+    getDisplayFolderIdsFromStorage(dispatch)
   }, [])
 
   return (

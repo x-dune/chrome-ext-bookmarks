@@ -20,6 +20,7 @@ const BookmarkFolderPickerDialog = (props: BookmarkFolderPickerDialogProps) => {
       <Title>Add bookmark folder</Title>
       {bookmarkFolders.map((item) => (
         <Button
+          key={item.id}
           onClick={() => {
             dispatch(displayFolderIdsActions.add(item.id))
             props.onClose()

@@ -1,10 +1,11 @@
 import { PayloadAction, combineReducers, createSlice } from "@reduxjs/toolkit"
+import { setDisplayFolderIdsInStorage } from "./bookmarkUtil"
 import { MAX_DISPLAY_FOLDER_IDS } from "@/bookmark/bookmarkConstants"
 import { BookmarkState } from "@/bookmark/types"
 
 const initialState: BookmarkState = {
   bookmarkTree: [],
-  displayFolderIds: ["1"],
+  displayFolderIds: [],
 }
 
 const bookmarkTree = createSlice({
@@ -26,9 +27,15 @@ const displayFolderIds = createSlice({
     set(_, action: PayloadAction<Array<string>>) {
       return action.payload
     },
+    setDefault() {
+      // default to showing Bookmarks Bar
+      return ["1"]
+    },
     add(state, action: PayloadAction<string>) {
       if (state.length < MAX_DISPLAY_FOLDER_IDS) {
-        return state.concat(action.payload)
+        const nextState = state.concat(action.payload)
+        setDisplayFolderIdsInStorage(nextState)
+        return nextState
       } else {
         return state
       }
