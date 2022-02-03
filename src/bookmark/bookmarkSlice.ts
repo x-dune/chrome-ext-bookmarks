@@ -40,6 +40,9 @@ const displayFolderIds = createSlice({
         return state
       }
     },
+    remove(state, action: PayloadAction<number>) {
+      return state.slice(0, action.payload).concat(state.slice(action.payload + 1))
+    },
     //edit
   },
 })

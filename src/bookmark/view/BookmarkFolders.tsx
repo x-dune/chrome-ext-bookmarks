@@ -16,8 +16,8 @@ const BookmarkFolders = () => {
 
   return (
     <Container>
-      {displayBookmarkFolder.map((node) => (
-        <BookmarkFolder key={node.id} item={node} />
+      {displayBookmarkFolder.map((node, index) => (
+        <BookmarkFolder item={node} index={index} key={index} />
       ))}
     </Container>
   )
