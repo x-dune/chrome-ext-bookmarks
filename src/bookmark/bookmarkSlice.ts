@@ -41,7 +41,9 @@ const displayFolderIds = createSlice({
       }
     },
     remove(state, action: PayloadAction<number>) {
-      return state.slice(0, action.payload).concat(state.slice(action.payload + 1))
+      const nextState = state.slice(0, action.payload).concat(state.slice(action.payload + 1))
+      setDisplayFolderIdsInStorage(nextState)
+      return nextState
     },
     //edit
   },
