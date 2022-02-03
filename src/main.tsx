@@ -6,6 +6,8 @@ import App from "@/App"
 import "open-props/style"
 import "open-props/normalize"
 import "open-props/colors-hsl"
+import "bootstrap-icons/font/bootstrap-icons.css"
+import "@/index.css"
 import { store } from "@/store"
 
 ReactDOM.render(
