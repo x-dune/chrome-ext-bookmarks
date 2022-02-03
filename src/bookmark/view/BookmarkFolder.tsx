@@ -11,7 +11,8 @@ interface BookmarkFolderProps {
 
 const BookmarkFolder = (props: BookmarkFolderProps) => {
   const dispatch = useAppDispatch()
-  const bookmarkChildren = props.item.children ?? []
+  // TODO: refactor this into selector
+  const bookmarkChildren = props.item.children?.filter((item) => item.url) ?? []
 
   return (
     <Container>
