@@ -1,26 +1,26 @@
 import IconButton from "@mui/material/IconButton"
-import { useState } from "react"
 import styled from "styled-components"
+import ListSelectDialog from "./dialog/views/ListSelectDialog"
 import { canAddDisplayFolderIdSelector } from "@/bookmark/bookmarkSelectors"
-import BookmarkFolderPickerDialog from "@/bookmark/view/BookmarkFolderPickerDialog"
+import bookmarkThunks from "@/bookmark/bookmarkThunks"
 import BookmarkFolders from "@/bookmark/view/BookmarkFolders"
-import { useAppSelector } from "@/store/hook"
+import { useAppDispatch, useAppSelector } from "@/store/hook"
 
 function App() {
   const canAddDisplayFolderId = useAppSelector(canAddDisplayFolderIdSelector)
-  const [open, setOpen] = useState(false)
+  const dispatch = useAppDispatch()
 
   return (
     <Container>
       <BookmarkFolders />
       {canAddDisplayFolderId ? (
         <ButtonContainer>
-          <IconButton onClick={() => setOpen(true)}>
+          <IconButton onClick={() => dispatch(bookmarkThunks.showAddBookmarkFolderDialog())}>
             <Icon className="bi-patch-plus-fill" />
           </IconButton>
         </ButtonContainer>
       ) : null}
-      <BookmarkFolderPickerDialog open={open} onClose={() => setOpen(false)} />
+      <ListSelectDialog />
     </Container>
   )
 }
