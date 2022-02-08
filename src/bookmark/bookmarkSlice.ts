@@ -1,7 +1,7 @@
 import { PayloadAction, combineReducers, createSlice } from "@reduxjs/toolkit"
 import { setDisplayFolderIdsInStorage } from "./bookmarkUtil"
 import { MAX_DISPLAY_FOLDER_IDS } from "@/bookmark/bookmarkConstants"
-import { BookmarkState } from "@/bookmark/types"
+import { BookmarkState, EditDisplayFolderIds } from "@/bookmark/types"
 
 const initialState: BookmarkState = {
   bookmarkTree: [],
@@ -45,7 +45,15 @@ const displayFolderIds = createSlice({
       setDisplayFolderIdsInStorage(nextState)
       return nextState
     },
-    //edit
+    edit(state, action: PayloadAction<EditDisplayFolderIds>) {
+      if (state[action.payload.index] && action.payload.item.children?.some((x) => x.url)) {
+        const nextState = [...state]
+        nextState[action.payload.index] = action.payload.item.id
+        return nextState
+      } else {
+        return state
+      }
+    },
   },
 })
 

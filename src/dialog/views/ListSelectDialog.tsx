@@ -1,9 +1,9 @@
 import Dialog from "@mui/material/Dialog"
 import Paper from "@mui/material/Paper"
 import styled from "styled-components"
-import { dialogConfigSelector, shouldShowDialogSelector } from "../dialogSelectors"
-import { dialogConfigActions } from "../dialogSlice"
 import Button from "@/components/Button"
+import { dialogConfigSelector, shouldShowDialogSelector } from "@/dialog/dialogSelectors"
+import { dialogConfigActions } from "@/dialog/dialogSlice"
 import { useAppDispatch, useAppSelector } from "@/store/hook"
 
 const ListSelectDialog = () => {

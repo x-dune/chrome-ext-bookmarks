@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import styled from "styled-components"
-import { getBookmarkTree, getDisplayFolderIdsFromStorage } from "../bookmarkUtil"
 import { displayBookmarkFolderSelector } from "@/bookmark/bookmarkSelectors"
+import { getBookmarkTree, getDisplayFolderIdsFromStorage } from "@/bookmark/bookmarkUtil"
 import BookmarkFolder from "@/bookmark/view/BookmarkFolder"
 import { useAppDispatch, useAppSelector } from "@/store/hook"
 

@@ -15,6 +15,22 @@ const bookmarkThunks = {
       }),
     )
   },
+
+  showEditBookmarkFolderDialog:
+    (index: number, id: string): AppThunk =>
+    async (dispatch, getState) => {
+      const otherBookmarkFoldersWithUrlChildren = bookmarkFoldersWithUrlChildrenSelector(getState()).filter(
+        (item) => item.id !== id,
+      )
+
+      dispatch(
+        dialogConfigActions.showDialog({
+          title: "Add bookmark folder",
+          items: otherBookmarkFoldersWithUrlChildren,
+          onSelect: (item) => dispatch(displayFolderIdsActions.edit({ index, item })),
+        }),
+      )
+    },
 }
 
 export default bookmarkThunks
