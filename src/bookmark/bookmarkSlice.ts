@@ -49,6 +49,7 @@ const displayFolderIds = createSlice({
       if (state[action.payload.index] && action.payload.item.children?.some((x) => x.url)) {
         const nextState = [...state]
         nextState[action.payload.index] = action.payload.item.id
+        setDisplayFolderIdsInStorage(nextState)
         return nextState
       } else {
         return state
