@@ -22,7 +22,11 @@ export const displayBookmarkFolderSelector = createSelector(
   (bookmarkFolders, folderIds) =>
     folderIds.flatMap((id) => {
       const found = bookmarkFolders.find((item) => item.id === id)
-      return found ? [found] : []
+      if (found && found.children?.some((item) => item.url && item.title)) {
+        return [found]
+      } else {
+        return []
+      }
     }),
 )
 

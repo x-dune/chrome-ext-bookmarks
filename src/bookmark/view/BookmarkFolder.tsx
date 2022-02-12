@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { isBookmarkTreeNodeLeaf } from "../bookmarkUtil"
 import BookmarkFolderTitleWithActions from "./BookmarkFolderTitleWithActions"
 import BookmarkItem from "@/bookmark/view/BookmarkItem"
 
@@ -8,8 +9,7 @@ interface BookmarkFolderProps {
 }
 
 const BookmarkFolder = (props: BookmarkFolderProps) => {
-  // TODO: refactor this into selector
-  const bookmarkChildren = props.item.children?.filter((item) => item.url) ?? []
+  const bookmarkChildren = props.item.children?.filter(isBookmarkTreeNodeLeaf) ?? []
 
   return (
     <Container>

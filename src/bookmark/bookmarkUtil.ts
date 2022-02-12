@@ -2,6 +2,7 @@ import reactLogo from "@/assets/react.svg"
 import viteLogo from "@/assets/vite.svg"
 import { STORAGE_KEY, dummyBookmarkTree } from "@/bookmark/bookmarkConstants"
 import { bookmarkTreeActions, displayFolderIdsActions } from "@/bookmark/bookmarkSlice"
+import { BookmarkTreeNode, BookmarkTreeNodeLeaf } from "@/bookmark/types"
 import { AppDispatch } from "@/store"
 import { isLocalEnv } from "@/util"
 
@@ -68,4 +69,8 @@ export function setDisplayFolderIdsInStorage(displayFolderIds: string[]) {
   } else {
     chrome.storage.local.set({ [STORAGE_KEY]: displayFolderIds })
   }
+}
+
+export function isBookmarkTreeNodeLeaf(item: BookmarkTreeNode | BookmarkTreeNodeLeaf): item is BookmarkTreeNodeLeaf {
+  return Boolean(item.url && item.title)
 }

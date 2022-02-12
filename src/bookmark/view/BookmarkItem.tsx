@@ -1,14 +1,15 @@
 import styled from "styled-components"
 import { getFavicon } from "@/bookmark/bookmarkUtil"
+import { BookmarkTreeNodeLeaf } from "@/bookmark/types"
 import LinkButton from "@/components/LinkButton"
 
 interface BookmarkItemProps {
-  item: chrome.bookmarks.BookmarkTreeNode
+  item: BookmarkTreeNodeLeaf
 }
 
 const BookmarkItem = (props: BookmarkItemProps) => {
   return (
-    <LinkButton href={props.item.url!} title={props.item.title}>
+    <LinkButton href={props.item.url} title={props.item.title}>
       <Image src={getFavicon(props.item)} alt="" />
       <Title>{props.item.title}</Title>
     </LinkButton>
