@@ -1,9 +1,9 @@
 import { PropsWithChildren } from "react"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 interface ButtonProps {
-  onClick?: VoidFunction
   title?: string
+  onClick: VoidFunction
 }
 
 const Button = (props: PropsWithChildren<ButtonProps>) => {
@@ -14,7 +14,7 @@ const Button = (props: PropsWithChildren<ButtonProps>) => {
   )
 }
 
-const Container = styled.div`
+export const buttonStyle = css`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,6 +28,10 @@ const Container = styled.div`
     border-color: var(--violet-7);
     background-color: hsl(var(--violet-7-hsl) / 30%);
   }
+`
+
+const Container = styled.div`
+  ${buttonStyle}
 `
 
 export default Button
