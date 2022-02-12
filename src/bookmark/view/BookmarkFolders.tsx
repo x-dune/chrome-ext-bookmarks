@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import styled from "styled-components"
 import { displayBookmarkFolderSelector } from "@/bookmark/bookmarkSelectors"
-import { getBookmarkTree, getDisplayFolderIdsFromStorage } from "@/bookmark/bookmarkUtil"
+import bookmarkThunks from "@/bookmark/bookmarkThunks"
 import BookmarkFolder from "@/bookmark/view/BookmarkFolder"
 import { useAppDispatch, useAppSelector } from "@/store/hook"
 
@@ -10,8 +10,8 @@ const BookmarkFolders = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    getBookmarkTree(dispatch)
-    getDisplayFolderIdsFromStorage(dispatch)
+    dispatch(bookmarkThunks.getBookmarkTree())
+    dispatch(bookmarkThunks.getDisplayFolderIdsFromStorage())
   }, [])
 
   return (

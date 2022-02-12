@@ -1,9 +1,7 @@
 import reactLogo from "@/assets/react.svg"
 import viteLogo from "@/assets/vite.svg"
-import { STORAGE_KEY, dummyBookmarkTree } from "@/bookmark/bookmarkConstants"
-import { bookmarkTreeActions, displayFolderIdsActions } from "@/bookmark/bookmarkSlice"
+import { STORAGE_KEY } from "@/bookmark/bookmarkConstants"
 import { BookmarkTreeNode, BookmarkTreeNodeLeaf } from "@/bookmark/types"
-import { AppDispatch } from "@/store"
 import { isLocalEnv } from "@/util"
 
 function getDummyFavicon(bookmarkNode: chrome.bookmarks.BookmarkTreeNode) {
@@ -34,32 +32,16 @@ export function bookmarkTreeNodeFindAll(
   return found
 }
 
-export function getBookmarkTree(dispatch: AppDispatch) {
+export async function getDisplayFolderIdsFromStorage() {
   if (isLocalEnv) {
-    dispatch(bookmarkTreeActions.set(dummyBookmarkTree))
+    const foledrIds = window.localStorage.getItem(STORAGE_KEY)
+    return foledrIds ? (JSON.parse(foledrIds) as string[]) : null
   } else {
-    chrome.bookmarks.getTree((result) => {
-      dispatch(bookmarkTreeActions.set(result))
-    })
-  }
-}
+    const folderIds = await new Promise<string[] | null>((resolve) =>
+      chrome.storage.local.get(STORAGE_KEY, (result) => resolve(result[STORAGE_KEY] ?? null)),
+    )
 
-export function getDisplayFolderIdsFromStorage(dispatch: AppDispatch) {
-  if (isLocalEnv) {
-    const result = window.localStorage.getItem(STORAGE_KEY)
-    if (result) {
-      dispatch(displayFolderIdsActions.set(JSON.parse(result)))
-    } else {
-      dispatch(displayFolderIdsActions.setDefault())
-    }
-  } else {
-    chrome.storage.local.get(STORAGE_KEY, (result) => {
-      if (result[STORAGE_KEY]) {
-        dispatch(displayFolderIdsActions.set(result[STORAGE_KEY]))
-      } else {
-        dispatch(displayFolderIdsActions.setDefault())
-      }
-    })
+    return folderIds
   }
 }
 
