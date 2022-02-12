@@ -31,7 +31,9 @@ const ButtonContainer = styled.div`
   max-width: 0px;
   opacity: 0;
   overflow: hidden;
-  transition: max-width 0.25s, opacity 0.25s;
+  transition: max-width, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
 `
 
 const Container = styled.div`

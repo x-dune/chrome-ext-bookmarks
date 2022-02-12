@@ -22,7 +22,9 @@ export const buttonStyle = css`
   border-radius: var(--radius-2);
   cursor: pointer;
   border: var(--border-size-2) solid transparent;
-  transition: border-color 0.25s, background-color 0.25s;
+  transition: border-color, background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
 
   &:hover {
     border-color: var(--violet-7);
