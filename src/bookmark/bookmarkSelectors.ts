@@ -34,7 +34,7 @@ export const bookmarkFoldersWithUrlChildrenSelector = createSelector(bookmarkFol
   bookmarkFolders.filter((item) => item.children?.some((x) => x.url)),
 )
 
-export const canAddDisplayFolderIdSelector = createSelector(
-  displayFolderIdsSelector,
-  (folderIds) => folderIds.length <= MAX_DISPLAY_FOLDER_IDS - 1,
-)
+export const canAddDisplayFolderIdSelector = createSelector(displayFolderIdsSelector, (folderIds) => {
+  // TODO: fix bug cos folderIds don't know which will get displayed due to the filtering, so theres 4 folderIds, but only 3 shown due to .url filtering
+  return folderIds.length <= MAX_DISPLAY_FOLDER_IDS - 1
+})
