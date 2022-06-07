@@ -3,6 +3,8 @@ import styled from "styled-components"
 import { displayFolderIdsActions } from "@/bookmark/bookmarkSlice"
 import bookmarkThunks from "@/bookmark/bookmarkThunks"
 import { useAppDispatch } from "@/store/hook"
+import { ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material"
+import { useReducer, useRef } from "react"
 
 interface BookmarkFolderTitleWithActionsProps {
   item: chrome.bookmarks.BookmarkTreeNode
@@ -11,27 +13,48 @@ interface BookmarkFolderTitleWithActionsProps {
 
 const BookmarkFolderTitleWithActions = (props: BookmarkFolderTitleWithActionsProps) => {
   const dispatch = useAppDispatch()
+  const [isMenuOpen, toggleIsMenuOpen] = useReducer((state) => !state, false)
+  const menuAnchorEl = useRef(null)
+
+  const renderMenu = () => {
+    return (
+      <Menu open={true} anchorEl={menuAnchorEl.current} onClose={() => toggleIsMenuOpen()}>
+        <MenuItem>
+          <ListItemIcon
+            onClick={() => dispatch(bookmarkThunks.showEditBookmarkFolderDialog(props.index, props.item.id))}
+          >
+            <Icon className="bi-pencil" />
+          </ListItemIcon>
+          <ListItemText>Edit</ListItemText>
+        </MenuItem>
+        <MenuItem>
+          <ListItemIcon>
+            <Icon className="bi-x-circle" onClick={() => dispatch(displayFolderIdsActions.remove(props.index))} />
+          </ListItemIcon>
+          <ListItemText>Delete</ListItemText>
+        </MenuItem>
+      </Menu>
+    )
+  }
 
   return (
     <Container>
       <FolderTitle>{props.item.title}</FolderTitle>
-      <ButtonContainer>
-        <IconButton onClick={() => dispatch(bookmarkThunks.showEditBookmarkFolderDialog(props.index, props.item.id))}>
-          <Icon className="bi-pencil" />
-        </IconButton>
-        <IconButton onClick={() => dispatch(displayFolderIdsActions.remove(props.index))}>
-          <Icon className="bi-x-circle" />
-        </IconButton>
-      </ButtonContainer>
+      <ThreeDotsIconButton
+        onClick={() => toggleIsMenuOpen()}
+        ref={menuAnchorEl}
+        style={{ opacity: isMenuOpen ? 1 : undefined }}
+      >
+        <Icon className="bi-three-dots-vertical" />
+      </ThreeDotsIconButton>
+      {isMenuOpen && menuAnchorEl.current ? renderMenu() : null}
     </Container>
   )
 }
 
-const ButtonContainer = styled.div`
-  max-width: 0px;
+const ThreeDotsIconButton = styled(IconButton)`
   opacity: 0;
-  overflow: hidden;
-  transition: max-width, opacity;
+  transition: opacity;
   transition-duration: 0.3s;
   transition-timing-function: ease-in;
 `
@@ -42,8 +65,7 @@ const Container = styled.div`
   flex-direction: row;
   align-items: center;
 
-  &:hover ${ButtonContainer} {
-    max-width: var(--size-15);
+  &:hover ${ThreeDotsIconButton} {
     opacity: 1;
   }
 `

@@ -10,8 +10,7 @@ const BookmarkFolders = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(bookmarkThunks.getBookmarkTree())
-    dispatch(bookmarkThunks.getDisplayFolderIdsFromStorage())
+    dispatch(bookmarkThunks.startup())
   }, [])
 
   return (

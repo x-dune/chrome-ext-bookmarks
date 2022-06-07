@@ -38,7 +38,6 @@ const ListSelectDialog = () => {
 }
 
 const StyledPaper = styled(Paper)`
-  background-color: var(--surface-1);
   padding: var(--size-2);
 `
 

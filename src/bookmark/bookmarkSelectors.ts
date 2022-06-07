@@ -16,6 +16,8 @@ const bookmarkFoldersSelector = createSelector(bookmarkTreeSelector, (bookmarkTr
   bookmarkTreeNodeFindAll(bookmarkTree, (item) => Boolean(item.children && item.children.length > 0)),
 )
 
+// BookmarkTreeNode[] for the displayFolderIds
+// BookmarkTreeNode must exist in the BookmarkTree and must have at least one valid children
 export const displayBookmarkFolderSelector = createSelector(
   bookmarkFoldersSelector,
   displayFolderIdsSelector,
@@ -30,11 +32,15 @@ export const displayBookmarkFolderSelector = createSelector(
     }),
 )
 
+export const validDisplayFolderIdSelector = createSelector(displayBookmarkFolderSelector, (displayBookmarkFolder) =>
+  displayBookmarkFolder.map((folder) => folder.id),
+)
+
 export const bookmarkFoldersWithUrlChildrenSelector = createSelector(bookmarkFoldersSelector, (bookmarkFolders) =>
   bookmarkFolders.filter((item) => item.children?.some((x) => x.url)),
 )
 
-export const canAddDisplayFolderIdSelector = createSelector(displayFolderIdsSelector, (folderIds) => {
+export const canAddDisplayFolderIdSelector = createSelector(validDisplayFolderIdSelector, (folderIds) => {
   // TODO: fix bug cos folderIds don't know which will get displayed due to the filtering, so theres 4 folderIds, but only 3 shown due to .url filtering
   return folderIds.length <= MAX_DISPLAY_FOLDER_IDS - 1
 })

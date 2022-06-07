@@ -1,27 +1,30 @@
 import IconButton from "@mui/material/IconButton"
-import styled from "styled-components"
+import styled, { ThemeProvider } from "styled-components"
 import ListSelectDialog from "./dialog/views/ListSelectDialog"
 import { canAddDisplayFolderIdSelector } from "@/bookmark/bookmarkSelectors"
 import bookmarkThunks from "@/bookmark/bookmarkThunks"
 import BookmarkFolders from "@/bookmark/view/BookmarkFolders"
 import { useAppDispatch, useAppSelector } from "@/store/hook"
+import theme from "./muiTheme"
 
 function App() {
   const canAddDisplayFolderId = useAppSelector(canAddDisplayFolderIdSelector)
   const dispatch = useAppDispatch()
 
   return (
-    <Container>
-      <BookmarkFolders />
-      {canAddDisplayFolderId ? (
-        <ButtonContainer>
-          <IconButton onClick={() => dispatch(bookmarkThunks.showAddBookmarkFolderDialog())}>
-            <Icon className="bi-patch-plus-fill" />
-          </IconButton>
-        </ButtonContainer>
-      ) : null}
-      <ListSelectDialog />
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <BookmarkFolders />
+        {canAddDisplayFolderId ? (
+          <ButtonContainer>
+            <IconButton onClick={() => dispatch(bookmarkThunks.showAddBookmarkFolderDialog())}>
+              <Icon className="bi-patch-plus-fill" />
+            </IconButton>
+          </ButtonContainer>
+        ) : null}
+        <ListSelectDialog />
+      </Container>
+    </ThemeProvider>
   )
 }
 
