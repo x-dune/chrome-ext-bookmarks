@@ -5,6 +5,7 @@ export type BookmarkTreeNodeLeaf = BookmarkTreeNode & Required<Pick<BookmarkTree
 export interface BookmarkState {
   bookmarkTree: chrome.bookmarks.BookmarkTreeNode[]
   displayFolderIds: string[]
+  draggedFolderIndex: number | null
 }
 
 export interface EditDisplayFolderIds {

@@ -1,6 +1,6 @@
 import IconButton from "@mui/material/IconButton"
 import styled from "styled-components"
-import { displayFolderIdsActions } from "@/bookmark/bookmarkSlice"
+import { displayFolderIdsActions, draggedFolderIndexActions } from "@/bookmark/bookmarkSlice"
 import bookmarkThunks from "@/bookmark/bookmarkThunks"
 import { useAppDispatch } from "@/store/hook"
 import { ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material"
@@ -38,7 +38,15 @@ const BookmarkFolderTitleWithActions = (props: BookmarkFolderTitleWithActionsPro
   }
 
   return (
-    <Container>
+    <Container
+      onDragStart={() => {
+        dispatch(draggedFolderIndexActions.setIndex(props.index))
+      }}
+      onDragEnd={() => {
+        dispatch(draggedFolderIndexActions.unset())
+      }}
+      draggable
+    >
       <FolderTitle>{props.item.title}</FolderTitle>
       <ThreeDotsIconButton
         onClick={() => toggleIsMenuOpen()}

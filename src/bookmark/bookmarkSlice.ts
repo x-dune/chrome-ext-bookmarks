@@ -6,6 +6,7 @@ import { BookmarkState, EditDisplayFolderIds } from "@/bookmark/types"
 const initialState: BookmarkState = {
   bookmarkTree: [],
   displayFolderIds: [],
+  draggedFolderIndex: null,
 }
 
 const bookmarkTree = createSlice({
@@ -55,14 +56,38 @@ const displayFolderIds = createSlice({
         return state
       }
     },
+    swapIndex(state, action: PayloadAction<[number, number]>) {
+      const nextState = [...state]
+      const [index1, index2] = action.payload
+      const temp = nextState[index1]
+      nextState[index1] = nextState[index2]
+      nextState[index2] = temp
+      return nextState
+    },
   },
 })
 
 export const displayFolderIdsActions = displayFolderIds.actions
 
+const draggedFolderIndex = createSlice({
+  name: "bookmar/draggedFolderIndex",
+  initialState: initialState.draggedFolderIndex,
+  reducers: {
+    setIndex(_, action: PayloadAction<number>) {
+      return action.payload
+    },
+    unset() {
+      return initialState.draggedFolderIndex
+    },
+  },
+})
+
+export const draggedFolderIndexActions = draggedFolderIndex.actions
+
 const bookmark = combineReducers<BookmarkState>({
   bookmarkTree: bookmarkTree.reducer,
   displayFolderIds: displayFolderIds.reducer,
+  draggedFolderIndex: draggedFolderIndex.reducer,
 })
 
 export default bookmark

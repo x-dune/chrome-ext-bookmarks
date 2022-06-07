@@ -6,6 +6,7 @@ import type { RootState } from "@/store"
 const bookmarkSelector = (state: RootState) => state.bookmark
 const bookmarkTreeSelector = createSelector(bookmarkSelector, (bookmark) => bookmark.bookmarkTree)
 const displayFolderIdsSelector = createSelector(bookmarkSelector, (bookmark) => bookmark.displayFolderIds)
+export const draggedFolderIndexSelector = createSelector(bookmarkSelector, (bookmark) => bookmark.draggedFolderIndex)
 
 export const bookmarkBarSelector = createSelector(
   bookmarkTreeSelector,
