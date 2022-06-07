@@ -28,8 +28,8 @@ const BookmarkFolderTitleWithActions = (props: BookmarkFolderTitleWithActionsPro
           <ListItemText>Edit</ListItemText>
         </MenuItem>
         <MenuItem>
-          <ListItemIcon>
-            <Icon className="bi-x-circle" onClick={() => dispatch(displayFolderIdsActions.remove(props.index))} />
+          <ListItemIcon onClick={() => dispatch(displayFolderIdsActions.remove(props.index))}>
+            <Icon className="bi-x-circle" />
           </ListItemIcon>
           <ListItemText>Delete</ListItemText>
         </MenuItem>
