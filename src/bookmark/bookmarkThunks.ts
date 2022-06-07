@@ -8,6 +8,14 @@ import { AppThunk } from "@/store"
 import { isLocalEnv } from "@/util"
 
 const bookmarkThunks = {
+  startup: (): AppThunk => async (dispatch) => {
+    await Promise.all([
+      dispatch(bookmarkThunks.getBookmarkTree()),
+      dispatch(bookmarkThunks.getDisplayFolderIdsFromStorage()),
+    ])
+    await dispatch(bookmarkThunks.cleanDisplayFolderIdsInStorage())
+  },
+
   showAddBookmarkFolderDialog: (): AppThunk => async (dispatch, getState) => {
     const bookmarkFoldersWithUrlChildren = bookmarkFoldersWithUrlChildrenSelector(getState())
 
@@ -62,13 +70,17 @@ const bookmarkThunks = {
     setDisplayFolderIdsInStorage(validDisplayFolderId)
   },
 
-  startup: (): AppThunk => async (dispatch) => {
-    await Promise.all([
-      dispatch(bookmarkThunks.getBookmarkTree()),
-      dispatch(bookmarkThunks.getDisplayFolderIdsFromStorage()),
-    ])
-    await dispatch(bookmarkThunks.cleanDisplayFolderIdsInStorage())
-  },
+  removeBookmark:
+    (id: string): AppThunk =>
+    async (dispatch) => {
+      if (isLocalEnv) {
+        console.error("Unimplented")
+      } else {
+        chrome.bookmarks.remove(id, () => {
+          dispatch(bookmarkThunks.getBookmarkTree())
+        })
+      }
+    },
 }
 
 export default bookmarkThunks
