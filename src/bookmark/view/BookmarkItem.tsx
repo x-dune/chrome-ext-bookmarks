@@ -13,29 +13,14 @@ const BookmarkItem = (props: BookmarkItemProps) => {
   const dispatch = useDispatch()
 
   return (
-    <StyledLinkButton
-      onMouseDown={(e) => {
-        switch (e.nativeEvent.button) {
-          case 0: // Left click
-            if (e.ctrlKey && e.altKey) {
-              dispatch(bookmarkThunks.removeBookmark(props.item.id))
-            } else {
-              location.assign(props.item.url)
-            }
-            break
-          case 1: // Middle click
-            window.open(props.item.url, "_blank")?.focus()
-            break
-        }
-      }}
-      title={props.item.title}
-    >
+    <StyledLinkButton title={props.item.title} href={props.item.url}>
       <TitleContainer>
         <Image src={getFavicon(props.item)} alt="" />
         <Title>{props.item.title}</Title>
       </TitleContainer>
       <ThreeDotsButton
-        onMouseDown={(e) => {
+        onClick={(e) => {
+          e.preventDefault()
           e.stopPropagation()
           dispatch(bookmarkThunks.removeBookmark(props.item.id))
         }}
