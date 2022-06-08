@@ -14,7 +14,7 @@ const BookmarkItem = (props: BookmarkItemProps) => {
 
   return (
     <StyledLinkButton
-      onClick={(e) => {
+      onMouseDown={(e) => {
         switch (e.nativeEvent.button) {
           case 0: // Left click
             if (e.ctrlKey && e.altKey) {
@@ -35,7 +35,7 @@ const BookmarkItem = (props: BookmarkItemProps) => {
         <Title>{props.item.title}</Title>
       </TitleContainer>
       <ThreeDotsButton
-        onClick={(e) => {
+        onMouseDown={(e) => {
           e.stopPropagation()
           dispatch(bookmarkThunks.removeBookmark(props.item.id))
         }}
