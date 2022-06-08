@@ -62,6 +62,7 @@ const displayFolderIds = createSlice({
       const temp = nextState[index1]
       nextState[index1] = nextState[index2]
       nextState[index2] = temp
+      setDisplayFolderIdsInStorage(nextState)
       return nextState
     },
   },
