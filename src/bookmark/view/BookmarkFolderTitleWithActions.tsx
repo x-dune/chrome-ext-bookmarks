@@ -19,16 +19,14 @@ const BookmarkFolderTitleWithActions = (props: BookmarkFolderTitleWithActionsPro
   const renderMenu = () => {
     return (
       <Menu open={true} anchorEl={menuAnchorEl.current} onClose={() => toggleIsMenuOpen()}>
-        <MenuItem>
-          <ListItemIcon
-            onClick={() => dispatch(bookmarkThunks.showEditBookmarkFolderDialog(props.index, props.item.id))}
-          >
+        <MenuItem onClick={() => dispatch(bookmarkThunks.showEditBookmarkFolderDialog(props.index, props.item.id))}>
+          <ListItemIcon>
             <Icon className="bi-pencil" />
           </ListItemIcon>
           <ListItemText>Edit</ListItemText>
         </MenuItem>
-        <MenuItem>
-          <ListItemIcon onClick={() => dispatch(displayFolderIdsActions.remove(props.index))}>
+        <MenuItem onClick={() => dispatch(displayFolderIdsActions.remove(props.index))}>
+          <ListItemIcon>
             <Icon className="bi-x-circle" />
           </ListItemIcon>
           <ListItemText>Delete</ListItemText>
