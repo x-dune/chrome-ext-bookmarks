@@ -43,6 +43,7 @@ const ThreeDotsButton = styled.div`
 const StyledLinkButton = styled.a`
   ${buttonStyle}
   text-decoration: none;
+  margin-inline: 0;
 
   &:hover ${ThreeDotsButton} {
     opacity: 1;
@@ -51,11 +52,13 @@ const StyledLinkButton = styled.a`
 
 const TitleContainer = styled.div`
   display: flex;
+  padding-left: var(--size-2);
   flex-direction: row;
   justify-content: center;
   align-items: center;
   flex: 1;
   max-width: 100%;
+  overflow: hidden;
 `
 
 const Image = styled.img`

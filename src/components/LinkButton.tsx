@@ -18,6 +18,7 @@ const Button = (props: PropsWithChildren<LinkButtonProps>) => {
 const Link = styled.a`
   ${buttonStyle}
   text-decoration: none;
+  margin-inline: 0;
 `
 
 export default Button

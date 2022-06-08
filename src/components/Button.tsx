@@ -18,7 +18,7 @@ export const buttonStyle = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 var(--size-3);
+  padding: 0;
   border-radius: var(--radius-2);
   cursor: pointer;
   border: var(--border-size-2) solid transparent;
